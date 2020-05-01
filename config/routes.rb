@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'posts/index'
+
+  get 'posts/show'
+
+  get 'posts/edit'
+
+  get 'users/index'
+
+  get 'users/show'
+
+  get 'users/edit'
+
   devise_for :admins, skip: :all
   devise_scope :admin do
     get 'admins/sign_in' => 'admins/sessions#new', as: 'new_admin_session'
@@ -18,6 +30,11 @@ Rails.application.routes.draw do
   
   namespace :users do
     resources :posts
+  end
+  
+  namespace :admins do
+    resources :posts
+    resources :users
   end
   root 'users/posts#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
